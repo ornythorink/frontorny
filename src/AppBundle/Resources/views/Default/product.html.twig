@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ render(controller(
+    'AppBundle:Navbar:index'
+    )) }}
+
+    <div id="main" class="container-fluid">
+        <!--left-->
+        <div class="col-sm-2">
+
+        </div><!--/left-->
+
+        <!--center-->
+        <div class="col-sm-8 col-lg-8">
+            <div class="row">
+                <h3>{{ item.name }}</h3>
+            </div>
+            <div class="col-sm-4 col-lg-4">
+                <img class="img-responsive" src="{{ item.image }}" alt=""/>
+            </div>
+            <div class="col-sm-8 col-lg-8">
+                {% for offer in item.offers %}
+
+                    <div class="col-lg-12 nomargin" >
+                        <div class="col-lg-3" style="padding-top: 40px;" >
+                            {{  offer.name }}
+                        </div>
+
+                        <div class="col-lg-1  lowest" style="padding-top: 40px;" >
+                            {% if offer.promo is defined and offer.promo != null and offer.promo != offer.price %}
+                                <del>{{ offer.price|priceformatter }}</del>
+                                <br/>{{ offer.promo|priceformatter }}
+                            {% else %}
+                                {{ offer.price|priceformatter }}
+                            {% endif %}
+                        </div>
+                        <div class="col-lg-3">
+                            <img class="img-responsive" src="{{ offer.image }}" alt=""/>
+                            <br/>
+                        </div>
+                          <div class="col-lg-2 nomargin" style="padding-top: 40px;">
+
+                            {% if offer.logostore is defined and offer.logostore != '' %}
+                                <img class="img-responsive" src="{{ offer.logostore }}"/>
+                            {% else %}
+                                {% if logolist is defined and  logolist[offer.program] is defined %}
+                                    <img class="img-responsive"
+                                         src="{{ logolist[offer.program] }}"/>
+                                {% else %}
+                                    {{ offer.program }}
+                                {% endif %}
+                            {% endif %}
+
+                        </div>
+
+                        <div class="col-lg-3 voiroffre" style="padding-top: 40px;">
+                            <a class="btn btn-primary gradient " target="_blank"
+                               href="{{ path('redirect', {'id': offer.id}) }}" rel="nofollow" role="button">Voir
+                                l'offre</a>
+                        </div>
+                        <hr>
+                    </div>
+                {% endfor %}
+            </div>
+            <div clas="row">
+                <div class="col-sm-12 col-lg-12">
+                    {{ item.description }}
+                </div>
+            </div>
+
+        </div>
+        <br/>
+
+    </div><!--/container-fluid-->
+
+{% endblock %}
+
+
+

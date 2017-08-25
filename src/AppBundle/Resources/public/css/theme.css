@@ -1,0 +1,404 @@
+/* deploy3 */
+body {
+    padding-top: 70px;
+    font-family:"Lavender Script Pro Regular";
+    /*background-image: url("http://127.0.0.1:8080/bundles/app/img/paper.jpg");*/
+    background-color: #eee;
+}
+#tagcloud {
+    width:80%;
+}
+
+
+.box{
+    width: 100%;
+}
+
+.navbar-brand{
+    padding: 0 0 0 5px;
+}
+
+.cartouche {
+    padding: 0 0 0 0;
+    /*min-height: 480px;*/
+    /*max-height:480px;*/
+}
+
+.panel-default{
+    font-family:"Lavender Script Pro Regular";
+}
+.panel-default .panel-heading
+{
+    text-transform: uppercase;
+    color: #FFF;
+    background-color:   #949494;
+    opacity: .8;
+    /* For IE 5-7 */
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    /* For IE 8 */
+    -MS-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    height:70px;
+    /*border-color: #000;*/
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    box-sizing: border-box;
+}
+
+.side .panel-heading{
+    height:40px;
+}
+
+.panel-footer.foot {
+    background-color:   #FFFFFF;
+}
+
+.brand{
+    padding:5px 5px 5px 5px;
+    color: #FFF;
+    background: #7ECA6D;
+    font-weight:bold;
+    max-height: 30px;
+}
+
+.image{
+    min-height:220px;
+}
+
+.cartouche div .img-responsive{
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    max-height:220px;
+}
+
+.captions ul{
+    padding:0px;
+    /*border: 1px solid #CCCCCC;*/
+}
+
+
+.logostorebox {
+    padding-bottom: 5px; /* encore utile */
+
+}
+
+.logostorebox img{
+    /*border: 1px solid #CCC;*/
+}
+
+.lowest{
+    padding-top:5px;
+    color:#008800;
+    font-weight:bold;
+    white-space: nowrap;
+}
+.nomargin{
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+.highest{
+    color:#dd4b39;
+    font-weight:bold;
+    margin-left:-10px;
+}
+
+.labox{
+    padding: 0 45px 0 0;
+}
+
+.la{
+    font-family: 'Gentium Basic', serif;
+    text-align:justify;
+    font-size: 1.20em;
+    padding: 0 0 0 0;
+}
+
+
+figure {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+figcaption {
+    position: absolute;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 10px 20px;
+}
+
+figcaption {
+    position: absolute;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 10px 20px;
+    opacity: 1;
+    left: 0;
+    bottom: 0;
+}
+
+figcaption h2{
+    font-family:"Lavender Script Pro Regular";
+    font-size: 1.2em;
+}
+
+.pub-container
+{
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.pub-container .iframe
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#bloc6 a img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-right:-10px;
+}
+
+
+/*
+232f3e couleur bandeau amazon.
+*/
+
+#myCarousel{
+    height: 100%;
+}
+
+a{ color: #7ECA6D; }
+
+.btn-primary.gradient {
+    font-size:15px;
+    background: -moz-linear-gradient(top,  #33a6cc 50%, #0099cc 50%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#33a6cc), color-stop(50%,#0099cc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #33a6cc 50%,#0099cc 50%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #33a6cc 50%,#0099cc 50%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #33a6cc 50%,#0099cc 50%); /* IE10+ */
+    background: linear-gradient(to bottom,  #33a6cc 50%,#0099cc 50%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33a6cc', endColorstr='#0099cc',GradientType=0 ); /* IE6-9 */
+}
+
+.voiroffre
+{
+    padding-right: 0px;
+    padding-left: 5px;
+}
+
+/*** degrade du bloc de recherches */
+
+
+.degrade{
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b8c6df+0,6d88b7+100;Grey+Blue+3D+%231 */
+    background: #b8c6df; /* Old browsers */
+    background: -moz-linear-gradient(top, #b8c6df 0%, #6d88b7 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #b8c6df 0%,#6d88b7 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #b8c6df 0%,#6d88b7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8c6df', endColorstr='#6d88b7',GradientType=0 ); /* IE6-9 */
+}
+
+
+/* range button */
+
+.range {
+    display: table;
+    position: relative;
+    height: 25px;
+    margin-top: 20px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.range input[type="range"] {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+    -o-appearance: none !important;
+    appearance: none !important;
+
+    display: table-cell;
+    width: 100%;
+    background-color: transparent;
+    height: 25px;
+    cursor: pointer;
+}
+.range input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+    -o-appearance: none !important;
+    appearance: none !important;
+
+    width: 11px;
+    height: 25px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0px;
+    background-color: rgb(153, 153, 153);
+}
+
+.range input[type="range"]::-moz-slider-thumb {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+    -o-appearance: none !important;
+    appearance: none !important;
+
+    width: 11px;
+    height: 25px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0px;
+    background-color: rgb(153, 153, 153);
+}
+
+.range output {
+    display: table-cell;
+    padding: 3px 5px 2px;
+    min-width: 40px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(153, 153, 153);
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+}
+.range input[type="range"] {
+    outline: none;
+}
+
+.range.range-primary input[type="range"]::-webkit-slider-thumb {
+    background-color: rgb(66, 139, 202);
+}
+.range.range-primary input[type="range"]::-moz-slider-thumb {
+    background-color: rgb(66, 139, 202);
+}
+.range.range-primary output {
+    background-color: rgb(66, 139, 202);
+}
+.range.range-primary input[type="range"] {
+    outline-color: rgb(66, 139, 202);
+}
+
+.range.range-success input[type="range"]::-webkit-slider-thumb {
+    background-color: rgb(92, 184, 92);
+}
+.range.range-success input[type="range"]::-moz-slider-thumb {
+    background-color: rgb(92, 184, 92);
+}
+.range.range-success output {
+    background-color: rgb(92, 184, 92);
+}
+.range.range-success input[type="range"] {
+    outline-color: rgb(92, 184, 92);
+}
+
+.range.range-info input[type="range"]::-webkit-slider-thumb {
+    background-color: rgb(91, 192, 222);
+}
+.range.range-info input[type="range"]::-moz-slider-thumb {
+    background-color: rgb(91, 192, 222);
+}
+.range.range-info output {
+    background-color: rgb(91, 192, 222);
+}
+.range.range-info input[type="range"] {
+    outline-color: rgb(91, 192, 222);
+}
+
+.range.range-warning input[type="range"]::-webkit-slider-thumb {
+    background-color: rgb(240, 173, 78);
+}
+.range.range-warning input[type="range"]::-moz-slider-thumb {
+    background-color: rgb(240, 173, 78);
+}
+.range.range-warning output {
+    background-color: rgb(240, 173, 78);
+}
+.range.range-warning input[type="range"] {
+    outline-color: rgb(240, 173, 78);
+}
+
+.range.range-danger input[type="range"]::-webkit-slider-thumb {
+    background-color: rgb(217, 83, 79);
+}
+.range.range-danger input[type="range"]::-moz-slider-thumb {
+    background-color: rgb(217, 83, 79);
+}
+.range.range-danger output {
+    background-color: rgb(217, 83, 79);
+}
+.range.range-danger input[type="range"] {
+    outline-color: rgb(217, 83, 79);
+}
+.bloc{
+    padding-bottom : 10px;
+
+}
+.bloc img{
+    /*max-height:305px;*/
+}
+
+.search-form {
+
+    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.4);
+    min-height: 75px;
+    max-height: 75px;
+    font-size: 18px;
+    background-color: #2b2e43;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #fff;
+    padding: 20px 0 20px 0;
+}
+.search-form select{
+    color: #000000;
+    height: 34px;
+    max-height: 34px;
+}
+
+#logo{
+    padding-top:20px;
+    padding-left: 5px;
+}
+#main {
+    padding-top:20px;
+}

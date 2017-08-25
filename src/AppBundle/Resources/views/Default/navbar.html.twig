@@ -1,0 +1,43 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" rel="home" href="{{ app.request.schemeAndHttpHost }}">
+            <img id="logo" class="img-responsive"  src="{{ asset('bundles/app/img/logo2.png') }}" />
+        </a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse">
+        <div class="row search-form bloc">
+            <form action="/hms/accommodations" method="GET">
+                <div class="col-xs-6 col-md-8 ">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <select class="btn">
+                                <option>Tous les genres.</option>
+                                <option>test test test</option>
+                                <option>test</option>
+                                <option>test</option>
+                            </select>
+                            <select class="btn">
+                                <option>Tous les styles</option>
+                                <option>test</option>
+                                <option>test</option>
+                            </select>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Search" id="txtSearch"/>
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br/>
+        </div>
+    </div>
+</nav>
