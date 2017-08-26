@@ -17,6 +17,8 @@ class CategorieController extends Controller
     public function indexAction(Request $request, $slug, $page)
     {
         $locale = $request->attributes->get('_locale');
+        $request->setLocale('fr');
+
         //$agent = $_SERVER['HTTP_USER_AGENT'] ;
         //$ip = $_SERVER['REMOTE_ADDR'];
 
