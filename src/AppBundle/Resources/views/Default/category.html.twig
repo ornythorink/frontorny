@@ -6,6 +6,33 @@
     'AppBundle:Navbar:index'
     )) }}
 
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <!-- @todo a quoi ça sert ? -->
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+
+    <script>
+
+
+    function refreshBox(idProducts)
+    {
+        var route = Routing.generate('linkoffer', { id: idProducts });
+        $.ajax({
+            type: "GET",
+            url: route,
+            success: function(data){
+                console.log(data);
+
+                //var test = $("#" +  idProducts).text();
+                var test = $("#" +  idProducts).text(data);
+                console.log(test);
+                return data;
+            }
+        });
+    }
+
+    </script>
+
     <div id="main" class="container-fluid">
         <!--left-->
         <div class="col-sm-2">
@@ -52,10 +79,13 @@
                                             <img class="img-responsive errortest" src="{{ item.image }}" alt=""/>
                                         </a>
                                     </div>
+
                                     <div class="panel-footer foot text-center">
                                         <a class="btn btn-danger gradient " target="_blank"
                                            href="{{ path('product', {'slug': slug, 'id': item.id}) }}" rel="nofollow"
-                                           role="button">Voir les {{ item.offers|length }} offre(s).
+                                           role="button"><script>var teest =  refreshBox({{  item.id }})</script>
+                                            Voir les <span id="{{ item.id }}" ></span> offre(s).
+
                                         </a>
                                      </div>
                                 </div>

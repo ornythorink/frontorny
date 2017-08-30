@@ -77,6 +77,7 @@ class ComposerStaticInit971b5e6116b27919d64e874daadd79b3
         'F' => 
         array (
             'Fig\\Link\\' => 9,
+            'FOS\\JsRoutingBundle\\' => 20,
         ),
         'D' => 
         array (
@@ -225,6 +226,10 @@ class ComposerStaticInit971b5e6116b27919d64e874daadd79b3
         array (
             0 => __DIR__ . '/..' . '/fig/link-util/src',
         ),
+        'FOS\\JsRoutingBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofsymfony/jsrouting-bundle',
+        ),
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
@@ -283,6 +288,10 @@ class ComposerStaticInit971b5e6116b27919d64e874daadd79b3
         ),
         'J' => 
         array (
+            'JsonpCallbackValidator' => 
+            array (
+                0 => __DIR__ . '/..' . '/willdurand/jsonp-callback-validator/src',
+            ),
             'JMS\\I18nRoutingBundle' => 
             array (
                 0 => __DIR__ . '/..' . '/jms/i18n-routing-bundle',

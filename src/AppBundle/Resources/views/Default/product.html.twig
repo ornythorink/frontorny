@@ -14,13 +14,18 @@
 
         <!--center-->
         <div class="col-sm-8 col-lg-8" style="background-color: #FFFFFF;">
-            <div class="row">
-                <h3>{{ item.name }}</h3>
+            <div class="row" style="padding:0 20px; 0 20px">
+                <h3 >{{ item.name }}</h3>
             </div>
             <div class="col-sm-4 col-lg-4">
                 <img class="img-responsive" src="{{ item.image }}" alt=""/>
             </div>
             <div class="col-sm-8 col-lg-8">
+                <div clas="row">
+                    <div class="col-sm-12 col-lg-12">
+                        {{ item.description }}
+                    </div>
+                </div>
                 {% for offer in item.offers %}
 
                     <div class="col-lg-12 nomargin" >
@@ -30,8 +35,8 @@
 
                         <div class="col-lg-1  lowest" style="padding-top: 40px;" >
                             {% if offer.promo is defined and offer.promo != null and offer.promo != offer.price %}
-                                <del>{{ offer.price|priceformatter }}</del>
-                                <br/>{{ offer.promo|priceformatter }}
+                                <del>{{ offer.promo|priceformatter }} </del>
+                                <br/>{{ offer.price|priceformatter }}
                             {% else %}
                                 {{ offer.price|priceformatter }}
                             {% endif %}
@@ -63,11 +68,6 @@
                         <hr>
                     </div>
                 {% endfor %}
-            </div>
-            <div clas="row">
-                <div class="col-sm-12 col-lg-12">
-                    {{ item.description }}
-                </div>
             </div>
 
         </div>

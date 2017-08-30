@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use GuzzleHttp\Client;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class CategorieController extends Controller
 {
@@ -63,4 +65,24 @@ class CategorieController extends Controller
             )
         );
     }
+    /**
+     * @Route("/l/{id}", name="linkoffer" ,   options = { "expose" = true }),
+     *
+     *     options = { "expose" = true },
+     */
+    public function countLinkedAction(Request $request, $id)
+    {
+        $locale = $request->attributes->get('_locale');
+        $request->setLocale('fr');
+        $client = new Client();
+
+        $json = $client->request('GET','http://127.0.0.1:8001/'. $locale .'/linked/'. $id);
+        $decoded = json_decode($json->getBody()->getContents() );
+
+        //var_dump($decoded);
+
+        $count = count($decoded[0]->offers);
+        return new JsonResponse($count);
+    }
+
 }
