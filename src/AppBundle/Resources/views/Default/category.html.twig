@@ -9,11 +9,7 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <!-- @todo a quoi ça sert ? -->
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-
-
     <script>
-
-
     function refreshBox(idProducts)
     {
         var route = Routing.generate('linkoffer', { id: idProducts });
@@ -21,8 +17,6 @@
             type: "GET",
             url: route,
             success: function(data){
-                console.log(data);
-
                 //var test = $("#" +  idProducts).text();
                 var test = $("#" +  idProducts).text(data);
                 console.log(test);
@@ -30,7 +24,6 @@
             }
         });
     }
-
     </script>
 
     <div id="main" class="container-fluid">
@@ -66,6 +59,19 @@
 
         <!--center-->
         <div class="col-sm-8">
+            <div class="row">
+                {% for cat in subcat %}
+                    <div class="col-lg-3"  >
+                        <div class="col-lg-10 text-center" >
+                            <!-- <img class="img-responsive" style="max-height:100px;" src="{{ asset('bundles/app/img/chaussures-femme.jpg') }}" alt=""/>-->
+                            <strong>
+                                <h5><a  style="font-family:Arial; color: #2b2e43;"   href="{{ path('categorie', {'slug': cat.categoryslug}) }}" >{{ cat.name_categorie }}</a></h5>
+                                <hr>
+                            </strong>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
             <div class="row">
                 <div class="col-xs-12">
                     {% for item in pagination %}

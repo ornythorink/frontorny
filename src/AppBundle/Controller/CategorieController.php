@@ -9,6 +9,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use AppBundle\Utils\Configuration;
 
 
 class CategorieController extends Controller
@@ -26,7 +27,9 @@ class CategorieController extends Controller
 
         $client = new Client();
 
-        $json = $client->request('GET','http://127.0.0.1:8001/'. $locale .'/category/sdc/'
+        $json = $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
+            . $locale .'/category/sdc/'
             . $slug );
 
         $decoded = json_decode($json->getBody());
@@ -52,23 +55,27 @@ class CategorieController extends Controller
 
         $pagerfanta->haveToPaginate(); // whether the number of results if higher than the max per page
 
+        $jsonsubcat = $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
+            . $locale .'/category/sub/'. $slug );
+        $decodedCat = json_decode($jsonsubcat->getBody());
 
         // replace this example code with whatever you need
         return $this->render('AppBundle:Default:category.html.twig',
             array(
                 'locale'      => $locale,
-                'slug'        =>$slug,
-                'items'       => array(),
+                'slug'        =>$slug,       /* @todo pourquoi passer item ? */
+                'items'       => array(),    /* @todo idem pour item */
                 'brandFilter' => array(),
                 'priceFilter' => array(),
                 'pagination' => $pagerfanta,
+                'subcat'      => $decodedCat
             )
         );
     }
     /**
      * @Route("/l/{id}", name="linkoffer" ,   options = { "expose" = true }),
      *
-     *     options = { "expose" = true },
      */
     public function countLinkedAction(Request $request, $id)
     {
@@ -76,7 +83,9 @@ class CategorieController extends Controller
         $request->setLocale('fr');
         $client = new Client();
 
-        $json = $client->request('GET','http://127.0.0.1:8001/'. $locale .'/linked/'. $id);
+        $json = $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
+            . $locale .'/linked/'. $id);
         $decoded = json_decode($json->getBody()->getContents() );
 
         //var_dump($decoded);
