@@ -19,6 +19,7 @@ class CategorieController extends Controller
      */
     public function indexAction(Request $request, $slug, $page)
     {
+        // @todo ne pas oublier le forçage de la locale et gérer les traductions en
         $locale = $request->attributes->get('_locale');
         $request->setLocale('fr');
 

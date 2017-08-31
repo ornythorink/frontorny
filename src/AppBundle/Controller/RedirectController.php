@@ -17,7 +17,9 @@ class RedirectController extends Controller
         $locale = $request->attributes->get('_locale');
 
         $client = new Client();
-        $json = $client->request('GET','http://127.0.0.1:8001/'. $locale .'/products/' . $id);
+        $json = $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
+            . $locale .'/products/' . $id);
         $decoded = json_decode($json->getBody());
 
         if($decoded === null)

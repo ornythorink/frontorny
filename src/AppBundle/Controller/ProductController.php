@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use GuzzleHttp\Client;
+use AppBundle\Utils\Configuration;
 
 class ProductController extends Controller
 {
@@ -20,7 +21,8 @@ class ProductController extends Controller
         $client = new Client();
 
         $json =
-        $client->request('GET','http://127.0.0.1:8001/'
+        $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
             . $locale .'/product/slug/'. $slug .'/id/' . $id );
 
         $decoded = json_decode($json->getBody());
