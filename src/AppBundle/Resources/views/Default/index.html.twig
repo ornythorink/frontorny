@@ -16,14 +16,16 @@
 
 
     <div class="container-fluid">
-        <div class="col-md-12" style="font-size:18px; padding: 15px 0px 15px 0; margin-top:20px;">
+        <div class="row" style="font-size:18px; margin-top:20px;">
             {% for cat in rootcat %}
-                <div class="col-lg-2"  >
-                    <div class="col-lg-10 text-center" >
-                    <!-- <img class="img-responsive" style="max-height:100px;" src="{{ asset('bundles/app/img/chaussures-femme.jpg') }}" alt=""/>-->
+                <div class="col-lg-3"  >
+                    <div class="text-center" >
+
                         <strong>
                           <a  style="font-family:Arial; color: #2b2e43;"   href="{{ path('categorie', {'slug': cat.categoryslug}) }}" >{{ cat.name_categorie }}</a>
                         </strong>
+                        <br/>
+                        <br/>
                     </div>
                 </div>
              {% endfor %}
