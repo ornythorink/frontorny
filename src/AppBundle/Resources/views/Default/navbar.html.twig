@@ -12,13 +12,13 @@
     </div>
     <div class="collapse navbar-collapse">
         <div class="row search-form bloc">
-            <form action="/hms/accommodations" method="GET">
+            <form action="{{ path('search') }}" method="GET">
                 <div class="col-xs-6 col-md-8 ">
                     <div class="input-group">
                         <div class="input-group-btn">
-                            <select class="btn">
+                            <select name="genre" class="btn">
                                 <option>Tous les genres.</option>
-                                <option>test test test</option>
+                                <option value="hop">test test test</option>
                                 <option>test</option>
                                 <option>test</option>
                             </select>
@@ -28,7 +28,7 @@
                                 <option>test</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control" placeholder="Search" id="txtSearch"/>
+                            <input name="query" type="text" class="form-control" placeholder="Search" id="txtSearch"/>
                         <div class="input-group-btn">
                             <button class="btn btn-primary" type="submit">
                                 <span class="glyphicon glyphicon-search"></span>

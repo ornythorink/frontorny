@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ render(controller(
+    'AppBundle:Navbar:index'
+    )) }}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <!-- @todo a quoi ça sert ? -->
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script>
+        function refreshBox(idProducts)
+        {
+            var route = Routing.generate('linkoffer', { id: idProducts });
+            $.ajax({
+                type: "GET",
+                url: route,
+                success: function(data){
+                    //var test = $("#" +  idProducts).text();
+                    var test = $("#" +  idProducts).text(data);
+                    console.log(test);
+                    return data;
+                }
+            });
+        }
+    </script>
+
+    <div id="main" class="container-fluid">
+        <!--left-->
+        <div class="col-sm-2">
+            <br/>
+            <div class="side panel panel-default">
+                <div class="panel-heading">
+                    Marques
+                </div>
+                <div class="panel-body">
+                    {% for  weight, key in brandFilter %}
+                        <a class="marque" data-param="{{ key.name }}">{{ key.name }} ( {{ key.weight }} )</a><br/>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="side panel panel-default">
+                <div class="panel-heading">
+                    Prix
+                </div>
+                <div class="panel-body">
+                    {% for  key, price in priceFilter %}
+                        <a class="price" data-param="{{ key }}">{{ price }} </a><br/>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <hr>
+        </div><!--/left-->
+
+        <!--center-->
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-xs-12">
+                    {% for item in pagination %}
+                        <div class="col-lg-3" data-price="{{ item.price }}" data-brand="{{ item.brand }}">
+                            <div class="box panel panel-default">
+                                <div class="panel-heading"
+                                     style="background-color:white;color:grey;">{{ item.name|unicode(item.source_id)|truncate(60, true, '...') }}</div>
+                                <div class="cartouche panel-body">
+                                    <div class="image">
+                                        <a target="_blank" href="{{ path('redirect', {'id': item.id}) }}" rel="nofollow">
+                                            <img class="img-responsive errortest" src="{{ item.image }}" alt=""/>
+                                        </a>
+                                    </div>
+
+                                    <div class="panel-footer foot text-center">
+                                        <a class="btn btn-danger gradient " target="_blank"
+                                           href="{{ path('product', {'slug': slug, 'id': item.id}) }}" rel="nofollow"
+                                           role="button"><script>var teest =  refreshBox({{  item.id }})</script>
+                                            Voir les <span id="{{ item.id }}" ></span> offre(s).
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="text-center">
+
+                        {% if app.environment == 'dev' %}
+                            dev
+                        {% else %}
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- test chaussures -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:728px;height:90px"
+                                 data-ad-client="ca-pub-8150493752884542"
+                                 data-ad-slot="1024469312"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="pagerfanta text-center"> {{  pagerfanta(pagination, 'twitter_bootstrap3') }}
+                </div>
+            </div>
+            <hr>
+        </div><!--/center-->
+        <br/>
+
+    </div><!--/container-fluid-->
+
+{% endblock %}
+
+
+
