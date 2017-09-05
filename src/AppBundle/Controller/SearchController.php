@@ -22,17 +22,20 @@ class SearchController extends Controller
         $decoded = array();
         $client = new Client();
 
+        $query = $request->query->get('query');
+
         // @todo ne pas oublier le forçage de la locale et gérer les traductions en
         $locale = $request->attributes->get('_locale');
         $request->setLocale('fr');
 
-//        $json = $client->request('GET',
-//            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
-//            . $locale .'/category/sdc/');
+        $json = $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
+            . $locale .'/search/'
+            . $query );
 
         // try / ou null
-       // $decoded = json_decode($json->getBody());
-        $decoded =array();
+        $decoded = json_decode($json->getBody());
+
         $adapter = new ArrayAdapter($decoded);
         $pagerfanta = new Pagerfanta($adapter);
 
@@ -57,10 +60,11 @@ class SearchController extends Controller
         return $this->render('AppBundle:Default:search.html.twig' ,
             array(
                 'locale'      => $locale,
+                'query'       => $query,
                 'items'       => array(),    /* @todo pourquoi faire  un item  */
                 'brandFilter' => array(),
                 'priceFilter' => array(),
-                'pagination' => $pagerfanta,
+                'pagination'  => $pagerfanta,
             )
         );
     }
