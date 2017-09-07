@@ -26,14 +26,11 @@ class ProductController extends Controller
             . $locale .'/product/slug/'. $slug .'/id/' . $id );
 
         $decoded = json_decode($json->getBody());
-//        echo '<pre>';
-//        var_dump($decoded);
-
-        // replace this example code with whatever you need
+        //echo  '<pre>';var_dump($decoded->products[0]);exit;
         return $this->render('AppBundle:Default:product.html.twig',
             array(
                 'locale'      => $locale,
-                'item'       => $decoded[0],
+                'item'       => $decoded->products[0],
                 'brandFilter' => array(),
                 'priceFilter' => array(),
             )

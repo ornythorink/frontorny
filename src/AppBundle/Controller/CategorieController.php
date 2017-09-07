@@ -35,7 +35,8 @@ class CategorieController extends Controller
 
         $decoded = json_decode($json->getBody());
 
-        $adapter = new ArrayAdapter($decoded);
+
+        $adapter = new ArrayAdapter($decoded->products);
         $pagerfanta = new Pagerfanta($adapter);
 
         $pagerfanta->setMaxPerPage(20); // 10 by default
@@ -67,7 +68,7 @@ class CategorieController extends Controller
                 'locale'      => $locale,
                 'slug'        =>$slug,       /* @todo pourquoi passer item ? */
                 'items'       => array(),    /* @todo idem pour item */
-                'brandFilter' => array(),
+                'brandFilter' => (array) $decoded->metadata->brands, /* @todo pourquoi stdclass */
                 'priceFilter' => array(),
                 'pagination' => $pagerfanta,
                 'subcat'      => $decodedCat

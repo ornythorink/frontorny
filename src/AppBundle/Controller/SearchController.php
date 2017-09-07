@@ -36,7 +36,7 @@ class SearchController extends Controller
         // try / ou null
         $decoded = json_decode($json->getBody());
 
-        $adapter = new ArrayAdapter($decoded);
+        $adapter = new ArrayAdapter($decoded->products);
         $pagerfanta = new Pagerfanta($adapter);
 
         $pagerfanta->setMaxPerPage(20); // 10 by default
@@ -62,7 +62,7 @@ class SearchController extends Controller
                 'locale'      => $locale,
                 'query'       => $query,
                 'items'       => array(),    /* @todo pourquoi faire  un item  */
-                'brandFilter' => array(),
+                'brandFilter' => $decoded->metadata->brands,
                 'priceFilter' => array(),
                 'pagination'  => $pagerfanta,
             )
