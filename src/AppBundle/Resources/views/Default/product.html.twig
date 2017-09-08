@@ -34,7 +34,11 @@
                         </div>
 
                         <div class="col-lg-1  lowest" style="padding-top: 40px;" >
-                            {% if offer.promo is defined and offer.promo != null and offer.promo != offer.price %}
+                            {% if offer.promo is defined and offer.promo != null
+                            and  offer.promo != null
+                            and  offer.promo != '0.00'
+                            and offer.promo != offer.price
+                            %}
                                 <del>{{ offer.promo|priceformatter }} </del>
                                 <br/>{{ offer.price|priceformatter }}
                             {% else %}

@@ -17,9 +17,7 @@
             type: "GET",
             url: route,
             success: function(data){
-                //var test = $("#" +  idProducts).text();
-                var test = $("#" +  idProducts).text(data);
-                console.log(test);
+                var compute = $("#" +  idProducts).text(data);
                 return data;
             }
         });
@@ -81,7 +79,7 @@
                                      style="background-color:white;color:grey;">{{ item.name|unicode(item.source_id)|truncate(60, true, '...') }}</div>
                                 <div class="cartouche panel-body">
                                     <div class="image">
-                                        <a target="_blank" href="{{ path('redirect', {'id': item.id}) }}" rel="nofollow">
+                                        <a target="_blank" href="{{ path('product', {'slug': slug, 'id': item.id}) }}" rel="nofollow">
                                             <img class="img-responsive errortest" src="{{ item.image }}" alt=""/>
                                         </a>
                                     </div>
@@ -89,7 +87,7 @@
                                     <div class="panel-footer foot text-center">
                                         <a class="btn btn-danger gradient " target="_blank"
                                            href="{{ path('product', {'slug': slug, 'id': item.id}) }}" rel="nofollow"
-                                           role="button"><script>var teest =  refreshBox({{  item.id }})</script>
+                                           role="button"><script> refreshBox({{  item.id }})</script>
                                             Voir les <span id="{{ item.id }}" ></span> offre(s).
 
                                         </a>
