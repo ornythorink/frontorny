@@ -23,19 +23,78 @@ class CategorieController extends Controller
         $locale = $request->attributes->get('_locale');
         $request->setLocale('fr');
 
-        //$agent = $_SERVER['HTTP_USER_AGENT'] ;
-        //$ip = $_SERVER['REMOTE_ADDR'];
-
         $client = new Client();
 
         $json = $client->request('GET',
             Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
-            . $locale .'/category/sdc/'
+            . $locale .'/category/products/'
+            . $slug );
+
+//        $jsonKey = md5($json->getBody());
+//        $jp = fopen( $jsonKey . '.json' , 'a+');
+//        fwrite($jp, $json->getBody());
+//        fclose($jp);
+
+        $decoded = json_decode($json->getBody());
+        $adapter = new ArrayAdapter($decoded->products);
+        $pagerfanta = new Pagerfanta($adapter);
+
+        $pagerfanta->setMaxPerPage(20); // 10 by default
+        $maxPerPage = $pagerfanta->getMaxPerPage();
+
+        try  {
+            $pagerfanta->setCurrentPage($page);
+        }catch(NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException('Illegal page');
+        }
+
+        $currentPage = $pagerfanta->getCurrentPage();
+
+        $nbResults = $pagerfanta->getNbResults();
+        $currentPageResults = $pagerfanta->getCurrentPageResults();
+
+        $pagerfanta->getNbPages();
+
+        $pagerfanta->haveToPaginate(); // whether the number of results if higher than the max per page
+
+        $jsonsubcat = $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
+            . $locale .'/category/sub/'. $slug );
+        $decodedCat = json_decode($jsonsubcat->getBody());
+
+        // replace this example code with whatever you need
+        return $this->render('AppBundle:Default:category.html.twig',
+            array(
+                'locale'      => $locale,
+                'slug'        => $slug,       /* @todo pourquoi passer item ? */
+                'brandFilter' => (array) $decoded->metadata->brands, /* @todo pourquoi stdclass */
+                'priceFilter' => array(),
+                'pagination'  => $pagerfanta,
+                'subcat'      => $decodedCat,
+
+            )
+        );
+    }
+
+    /**
+     * @Route("/c/filter/{slug}/{page}/", name="filtercategory" , defaults={"page" = 1})
+     *
+     */
+    public function filterAction(Request $request, $slug, $page)
+    {
+        // @todo ne pas oublier le forçage de la locale et gérer les traductions en
+        $locale = $request->attributes->get('_locale');
+        $request->setLocale('fr');
+
+        $client = new Client();
+
+        $json = $client->request('GET',
+            Configuration::getApiUrl(
+                $this->container->get('kernel')->getEnvironment() )
+            . $locale .'/category/products/'
             . $slug );
 
         $decoded = json_decode($json->getBody());
-
-
         $adapter = new ArrayAdapter($decoded->products);
         $pagerfanta = new Pagerfanta($adapter);
 
@@ -75,6 +134,8 @@ class CategorieController extends Controller
             )
         );
     }
+
+
     /**
      * @Route("/l/{id}", name="linkoffer" ,   options = { "expose" = true }),
      *
