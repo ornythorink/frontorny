@@ -30,11 +30,6 @@ class CategorieController extends Controller
             . $locale .'/category/products/'
             . $slug );
 
-//        $jsonKey = md5($json->getBody());
-//        $jp = fopen( $jsonKey . '.json' , 'a+');
-//        fwrite($jp, $json->getBody());
-//        fclose($jp);
-
         $decoded = json_decode($json->getBody());
         $adapter = new ArrayAdapter($decoded->products);
         $pagerfanta = new Pagerfanta($adapter);
