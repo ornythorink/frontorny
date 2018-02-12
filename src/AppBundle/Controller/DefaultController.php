@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use GuzzleHttp\Client;
+use AppBundle\Utils\Configuration;
 
 class DefaultController extends Controller
 {
@@ -24,9 +25,12 @@ class DefaultController extends Controller
 
         $client = new Client();
 
-        $json = $client->request('GET','http://127.0.0.1:8001/{locale}/category/root');
-
+       $json = $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment())
+            .$locale.'/category/root');
+        $decoded = [];
         $decoded = json_decode($json->getBody());
+
 // var_dump($decoded);exit;
         return $this->render('AppBundle:Default:index.html.twig',
             array(

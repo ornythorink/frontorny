@@ -12,7 +12,7 @@ class Configuration
         {
             $url = 'http://127.0.0.1:8001/';
         } else {
-            $url = "http://orny.ovh/";
+            $url = "http://ornythorink.alwaysdata.net/";
         }
         return $url;
     }
