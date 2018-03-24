@@ -68,6 +68,34 @@ class SearchController extends Controller
             )
         );
     }
+
+    /**
+     * @Route("/search/{id}", name="productbysearch")
+     */
+    public function productbysearchAction(Request $request, $id)
+    {
+        // @todo ne pas oublier le forçage de la locale et gérer les traductions en
+        $locale = $request->attributes->get('_locale');
+        $request->setLocale('fr');
+        $client = new Client();
+        $slug = 'search';
+        $json =
+            $client->request('GET',
+                Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
+                . $locale .'/product/search/id/' . $id );
+
+        $decoded = json_decode($json->getBody());
+
+        return $this->render('AppBundle:Default:product.html.twig',
+            array(
+                'locale'      => $locale,
+                'item'       => $decoded->products,
+                'brandFilter' => array(),
+                'priceFilter' => array(),
+            )
+        );
+    }
+
     /**
      * @Route("/l/{id}", name="linkoffer" ,   options = { "expose" = true }),
      *

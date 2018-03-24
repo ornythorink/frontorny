@@ -17,7 +17,7 @@ class CategorieController extends Controller
     /**
      * @Route("/c/{slug}/{page}", name="categorie", defaults={"page" = 1})
      */
-    public function indexAction(Request $request, $slug, $page)
+    public function indexAction(Request $request, $slug, $page, $filter= null)
     {
         // @todo ne pas oublier le forçage de la locale et gérer les traductions en
         $locale = $request->attributes->get('_locale');
@@ -31,6 +31,12 @@ class CategorieController extends Controller
             . $slug );
 
         $decoded = json_decode($json->getBody());
+
+//        echo '<pre>';
+//      var_dump($decoded);exit;
+//        echo '</pre>';
+
+        //try if null
         $adapter = new ArrayAdapter($decoded->products);
         $pagerfanta = new Pagerfanta($adapter);
 
