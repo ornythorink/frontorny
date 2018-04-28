@@ -23,6 +23,7 @@ class SearchController extends Controller
         $client = new Client();
 
         $query = $request->query->get('query');
+        $genre = $request->query->get('genre');
 
         // @todo ne pas oublier le forçage de la locale et gérer les traductions en
         $locale = $request->attributes->get('_locale');
@@ -30,8 +31,8 @@ class SearchController extends Controller
 
         $json = $client->request('GET',
             Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
-            . $locale .'/search/'
-            . $query );
+            . $locale .'/search/
+            genre'. $genre.'/query'. $query );
 
         // try / ou null
         $decoded = json_decode($json->getBody());
