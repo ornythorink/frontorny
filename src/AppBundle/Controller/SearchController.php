@@ -10,33 +10,40 @@ use Pagerfanta\Pagerfanta;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Utils\Configuration;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SearchController extends Controller
 {
+    private $router;
+    public function __construct(UrlGeneratorInterface $router){
+        $this->router = $router;
+
+    }
+
     /**
-     * @Route("/search/", name="search", defaults={"page" = 1})
+     * @Route("/search/{page}/", name="search" , defaults={"page" = 1})
      */
-    public function indexAction(Request $request, $page)
+    public function productbysearchAction(Request $request, $page = 1)
     {
-        $decoded = array();
+        // @todo ne pas oublier le forçage de la locale et gérer les traductions en
+        $locale = $request->attributes->get('_locale');
+        $request->setLocale('fr');
         $client = new Client();
 
         $query = $request->query->get('query');
         $genre = $request->query->get('genre');
 
-        // @todo ne pas oublier le forçage de la locale et gérer les traductions en
-        $locale = $request->attributes->get('_locale');
-        $request->setLocale('fr');
+        $route = Configuration::getApiUrl($this->container->get('kernel')->getEnvironment())
+            . $locale .'/search/?query='.$query .'&genre='.$genre;
 
         $json = $client->request('GET',
-            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
-            . $locale .'/search/
-            genre'. $genre.'/query'. $query );
+            $route);
 
-        // try / ou null
         $decoded = json_decode($json->getBody());
-
+        /*echo 'pre';
+        var_dump($decoded);
+        echo '/<pre>';*/
         $adapter = new ArrayAdapter($decoded->products);
         $pagerfanta = new Pagerfanta($adapter);
 
@@ -58,41 +65,16 @@ class SearchController extends Controller
 
         $pagerfanta->haveToPaginate(); // whether the number of results if higher than the max per page
 
-        return $this->render('AppBundle:Default:search.html.twig' ,
-            array(
-                'locale'      => $locale,
-                'query'       => $query,
-                'items'       => array(),    /* @todo pourquoi faire  un item  */
-                'brandFilter' => $decoded->metadata->brands,
-                'priceFilter' => array(),
-                'pagination'  => $pagerfanta,
-            )
-        );
-    }
-
-    /**
-     * @Route("/search/{id}", name="productbysearch")
-     */
-    public function productbysearchAction(Request $request, $id)
-    {
-        // @todo ne pas oublier le forçage de la locale et gérer les traductions en
-        $locale = $request->attributes->get('_locale');
-        $request->setLocale('fr');
-        $client = new Client();
-        $slug = 'search';
-        $json =
-            $client->request('GET',
-                Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
-                . $locale .'/product/search/id/' . $id );
 
         $decoded = json_decode($json->getBody());
 
-        return $this->render('AppBundle:Default:product.html.twig',
+        return $this->render('AppBundle:Default:search.html.twig',
             array(
                 'locale'      => $locale,
                 'item'       => $decoded->products,
                 'brandFilter' => array(),
                 'priceFilter' => array(),
+                'pagination'  => $pagerfanta
             )
         );
     }
