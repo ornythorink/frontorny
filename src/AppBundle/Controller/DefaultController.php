@@ -19,10 +19,6 @@ class DefaultController extends Controller
         $locale = $request->attributes->get('_locale');
         $request->setLocale('fr');
 
-
-        //$agent = $_SERVER['HTTP_USER_AGENT'] ;
-        //$ip = $_SERVER['REMOTE_ADDR'];
-
         $client = new Client();
 
        $json = $client->request('GET',
@@ -31,15 +27,27 @@ class DefaultController extends Controller
         $decoded = [];
         $decoded = json_decode($json->getBody());
 
-// var_dump($decoded);exit;
+        $jsonhit = $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment())
+            .$locale.'/product/hits');
+        $hits = json_decode($jsonhit->getBody());
+//        echo '<pre>';
+//        var_dump($hits->products[0]->name);
+//        echo '</pre>';
+
         return $this->render('AppBundle:Default:index.html.twig',
             array(
+                'hits'        => json_decode($jsonhit->getBody() ),
                 'items'       => array(),
                 'brandFilter' => array(),
                 'priceFilter' => array(),
-                'locale' => $locale,
-                'rootcat' => $decoded
+                'locale'      => $locale,
+                'rootcat'     => $decoded
             )
         );
+
+
     }
+
+
 }

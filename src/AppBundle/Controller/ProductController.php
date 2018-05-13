@@ -19,14 +19,17 @@ class ProductController extends Controller
     {
         $locale = $request->attributes->get('_locale');
         $client = new Client();
+        // @todo ne pas oublier le forçage de la locale et gérer les traductions en
+        $locale = $request->attributes->get('_locale');
+        $request->setLocale('fr');
 
-        $json =
-        $client->request('GET',
+        $client = new Client();
+
+        $json = $client->request('GET',
             Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
-            . $locale .'/product/slug/'. $slug .'/id/' . $id );
+            . $locale .'/product/slug/'. $slug .'/id/' . $id);
 
         $decoded = json_decode($json->getBody());
-        //echo  '<pre>';var_dump($decoded->products[0]);exit;
         return $this->render('AppBundle:Default:product.html.twig',
             array(
                 'locale'      => $locale,

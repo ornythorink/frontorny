@@ -57,9 +57,24 @@
         <!--center-->
         <div class="col-sm-8">
             <div class="row">
+                <ol class="breadcrumb">
+                    {% for crump in breadcrump  %}
+                        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <a href=" {%  if crump.categoryslug != '/' %}
+                                            {{ path('categorie', {'slug': crump.categoryslug}) }}"
+                            itemprop="url">
+                            {% else %}
+                                {{ path('homepage') }}
+                            {% endif %}
+                                <span itemprop="title">{{ crump.name_category }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ol>
                 {% for cat in subcat %}
                     <div class="col-lg-3"  >
                         <div class="col-lg-10 text-center" >
+
                             <!-- <img class="img-responsive" style="max-height:100px;" src="{{ asset('bundles/app/img/chaussures-femme.jpg') }}" alt=""/>-->
                             <strong>
                                 <h5><a  style="font-family:Arial; color: #2b2e43;"   href="{{ path('categorie', {'slug': cat.categoryslug}) }}" >{{ cat.name_categorie }}</a></h5>

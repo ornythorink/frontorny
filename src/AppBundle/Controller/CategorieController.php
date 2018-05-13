@@ -63,11 +63,21 @@ class CategorieController extends Controller
             . $locale .'/category/sub/'. $slug );
         $decodedCat = json_decode($jsonsubcat->getBody());
 
+         $jsoncrump = $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
+            . $locale .'/category/breadcrump/'. $slug );
+
+        $breadcrump = json_decode($jsoncrump->getBody());
+//        echo "<pre>";
+//        var_dump($breadcrump);exit;
+//        echo "</pre>";
+
         // replace this example code with whatever you need
         return $this->render('AppBundle:Default:category.html.twig',
             array(
                 'locale'      => $locale,
                 'slug'        => $slug,       /* @todo pourquoi passer item ? */
+                'breadcrump'  => $breadcrump,
                 'brandFilter' => (array) $decoded->metadata->brands, /* @todo pourquoi stdclass */
                 'priceFilter' => array(),
                 'pagination'  => $pagerfanta,
