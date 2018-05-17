@@ -18,7 +18,7 @@ class DefaultController extends Controller
 
         $locale = $request->attributes->get('_locale');
         $request->setLocale('fr');
-
+	$jsonhits = [];
         $client = new Client();
 
        $json = $client->request('GET',
@@ -27,17 +27,21 @@ class DefaultController extends Controller
         $decoded = [];
         $decoded = json_decode($json->getBody());
 
+	try{
         $jsonhit = $client->request('GET',
             Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment())
             .$locale.'/product/hits');
         $hits = json_decode($jsonhit->getBody());
+	} catch(\Exception $e)
+	{
+	}
 //        echo '<pre>';
 //        var_dump($hits->products[0]->name);
 //        echo '</pre>';
 
         return $this->render('AppBundle:Default:index.html.twig',
             array(
-                'hits'        => json_decode($jsonhit->getBody() ),
+                'hits'        => $hits,
                 'items'       => array(),
                 'brandFilter' => array(),
                 'priceFilter' => array(),
