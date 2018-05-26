@@ -15,8 +15,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-
-        $locale = $request->attributes->get('_locale');
+	$locale = $request->attributes->get('_locale');
         $request->setLocale('fr');
 	    $jsonhit = [];
 	    $hits = [];
