@@ -26,13 +26,14 @@ class ProductController extends Controller
 
         $json = $client->request('GET',
             Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
-            . $locale .'/product/slug/'. $slug .'/id/' . $id);
+            . $locale .'/product/full/' . $id);
 
         $decoded = json_decode($json->getBody());
+ ;
         return $this->render('AppBundle:Default:product.html.twig',
             array(
                 'locale'      => $locale,
-                'item'       => $decoded->products[0],
+                'item'       => $decoded[0],
                 'brandFilter' => array(),
                 'priceFilter' => array(),
             )
