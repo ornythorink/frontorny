@@ -15,12 +15,11 @@ class ProductController extends Controller
     /**
      * @Route("/p/{slug}/{id}", name="product")
      */
-    public function indexAction(Request $request, $slug, $id)
+    public function indexAction( Request $request, $slug, $id)
     {
-        $locale = $request->attributes->get('_locale');
-        $client = new Client();
         // @todo ne pas oublier le forçage de la locale et gérer les traductions en
         $locale = $request->attributes->get('_locale');
+        $client = new Client();
         $request->setLocale('fr');
 
         $client = new Client();

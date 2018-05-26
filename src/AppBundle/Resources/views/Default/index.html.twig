@@ -30,9 +30,9 @@
 
                     <div>
                         <h3>Les plus cliqués</h3>
-                        <img src="{{  hits.products[0].image }}" width="200" height="200" />
-                        <img src="{{ hits.products[1].image  }}" width="200" height="200" />
-                        <img src="{{ hits.products[2].image  }}" width="200" height="200" />
+                        {% for hit in hits.products %}
+                            <img src="{{  hit.image }}" width="200" height="200" />
+                        {% endfor %}
                     </div>
 
                 </div>
