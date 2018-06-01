@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use GuzzleHttp\Client;
 use AppBundle\Utils\Configuration;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+
 
 class DefaultController extends Controller
 {
@@ -26,15 +29,53 @@ class DefaultController extends Controller
             .$locale.'/category/root');
         $decoded = [];
         $decoded = json_decode($json->getBody());
+   
 
-	try{
-        $jsonhit = $client->request('GET',
-            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment())
-            .$locale.'/hits');
-        $hits = json_decode($jsonhit->getBody());
-	} catch(\Exception $e)
-	{
-	}
+
+    	try{
+            $jsonhit = $client->request('GET',
+                Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment())
+                .$locale.'/hits');
+                $hits = json_decode($jsonhit->getBody());
+    	} 
+        catch(\Exception $e)
+    	{
+
+    	}
+
+        $fileSystem = new Filesystem();
+        foreach ($hits->products as $value) {
+            try {
+
+                    $exist = $fileSystem->exists( 'bundles/thumbs/' . md5($value->image));
+
+            } catch (IOExceptionInterface $exception) {
+                echo "An error occurred while searchinf file ".$exception->getPath();
+            }
+
+            // if image does not exist in cache
+            if($exist === false )
+            {
+                // get the remote image
+                $image = file_get_contents($value->image);
+
+                // create destination file
+                $fileSystem->touch( 'bundles/thumbs/' . md5($value->image));
+
+                // write image
+                $fileSystem->appendToFile(
+                    'bundles/thumbs/' . md5($value->image) ,
+                    $image
+                );
+                $fileSystem->chmod(
+                    'bundles/thumbs/' .md5($value->image),
+                    0755);
+                $value->bigimage = 'bundles/thumbs/' . md5($value->image) ;
+            } else {
+                $value->bigimage = 'bundles/thumbs/' . md5($value->image) ;
+            }
+        }
+
 
         echo '<pre>';
         //var_dump($hits);
