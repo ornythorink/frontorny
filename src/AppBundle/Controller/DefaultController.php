@@ -72,7 +72,7 @@ class DefaultController extends Controller
                     0755);
 
                 $im = new \Imagick('bundles/thumbs/' .md5($value->image));
-                $im->scaleImage(150, 150);
+                $im->scaleImage(0, 150);
                 $im->writeImage('bundles/thumbs/' .md5($value->image));
 
                 $value->bigimage = 'bundles/thumbs/' . md5($value->image) ;
