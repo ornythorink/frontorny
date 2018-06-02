@@ -20,14 +20,13 @@ class DefaultController extends Controller
     {
 	$locale = $request->attributes->get('_locale');
         $request->setLocale('fr');
-	    $jsonhit = [];
 	    $hits = [];
         $client = new Client();
 
        $json = $client->request('GET',
             Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment())
             .$locale.'/category/root');
-        $decoded = [];
+
         $decoded = json_decode($json->getBody());
    
 
@@ -72,7 +71,7 @@ class DefaultController extends Controller
                     0755);
 
                 $im = new \Imagick('bundles/thumbs/' .md5($value->image));
-                $im->scaleImage(0, 150);
+                $im->scaleImage(150, 150);
                 $im->writeImage('bundles/thumbs/' .md5($value->image));
 
                 $value->bigimage = 'bundles/thumbs/' . md5($value->image) ;
