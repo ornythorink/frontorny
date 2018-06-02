@@ -70,6 +70,11 @@ class DefaultController extends Controller
                 $fileSystem->chmod(
                     'bundles/thumbs/' .md5($value->image),
                     0755);
+
+                $im = new \Imagick('bundles/thumbs/' .md5($value->image));
+                $im->scaleImage(150, 150);
+                $im->writeImage('bundles/thumbs/' .md5($value->image));
+
                 $value->bigimage = 'bundles/thumbs/' . md5($value->image) ;
             } else {
                 $value->bigimage = 'bundles/thumbs/' . md5($value->image) ;
