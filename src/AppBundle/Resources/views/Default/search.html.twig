@@ -30,7 +30,7 @@
         <!--left-->
         <div class="col-sm-2">
             <br/>
-            <div class="side panel panel-default">
+            {#<div class="side panel panel-default">#}
                 {#<div class="panel-heading">#}
                     {#Marques#}
                 {#</div>#}
@@ -39,12 +39,12 @@
                         {#<a class="marque" data-param="{{ key }}">{{ key}}</a><br/>#}
                     {#{% endfor %}#}
                 {#</div>#}
-            </div>
+            {#</div>#}
 
-            <hr>
+            {#<hr>#}
 
-            <div class="side panel panel-default">
-                {#<div class="panel-heading">#}
+            {#<div class="side panel panel-default">#}
+                 {#<div class="panel-heading">#}
                     {#Prix#}
                 {#</div>#}
                 {#<div class="panel-body">#}
@@ -52,64 +52,64 @@
                         {#<a class="price" data-param="{{ key }}">{{ price }} </a><br/>#}
                     {#{% endfor %}#}
                 {#</div>#}
-            </div>
+            {#</div>#}
 
-            <hr>
-        </div><!--/left-->
+<hr>
+</div><!--/left-->
 
-        <!--center-->
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="col-xs-12">
-                    {% for item in pagination %}
-                        <div class="col-lg-3" data-price="{{ item.price }}" data-brand="{{ item.brand }}">
-                            <div class="box panel panel-default">
-                                <div class="panel-heading"
-                                     style="background-color:white;color:grey;">{{ item.name|unicode(item.source_id)|truncate(60, true, '...') }}</div>
-                                <div class="cartouche panel-body">
-                                    <div class="image">
-                                        <a target="_blank" href="{{ path('redirect', {'id': item.id}) }}" rel="nofollow">
-                                            <img class="img-responsive errortest" src="{{ item.image }}" alt=""/>
-                                        </a>
-                                    </div>
-
-                                    <div class="panel-footer foot text-center">
-                                        <a class="btn btn-danger gradient " target="_blank"
-                                           href="{{ path('search', {'id': item.id} ) }}" rel="nofollow"
-                                           role="button"><script>var teest =  refreshBox({{  item.id }})</script>
-                                            Voir les <span id="{{ item.id }}" ></span> offre(s).
-
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+<!--center-->
+<div class="col-sm-8">
+<div class="row">
+    <div class="col-xs-12">
+        {% for item in pagination %}
+            <div class="col-lg-3" data-price="{{ item.price }}" data-brand="{{ item.brand }}">
+                <div class="box panel panel-default">
+                    <div class="panel-heading"
+                         style="background-color:white;color:grey;">{{ item.name|unicode(item.source_id)|truncate(60, true, '...') }}</div>
+                    <div class="cartouche panel-body">
+                        <div class="image">
+                            <a target="_blank" href="{{ path('redirect', {'id': item.id}) }}" rel="nofollow">
+                                <img class="img-responsive errortest" src="{{ item.image }}" alt=""/>
+                            </a>
                         </div>
-                    {% endfor %}
-                    <div class="text-center">
 
-                        {% if app.environment == 'dev' %}
-                            dev
-                        {% else %}
-                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <!-- test chaussures -->
-                            <ins class="adsbygoogle"
-                                 style="display:inline-block;width:728px;height:90px"
-                                 data-ad-client="ca-pub-8150493752884542"
-                                 data-ad-slot="1024469312"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                        {% endif %}
+                        <div class="panel-footer foot text-center">
+                            <a class="btn btn-danger gradient " target="_blank"
+                               href="{{ path('search', {'id': item.id} ) }}" rel="nofollow"
+                               role="button"><script>var teest =  refreshBox({{  item.id }})</script>
+                                Voir les <span id="{{ item.id }}" ></span> offre(s).
+
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="pagerfanta text-center"> {{  pagerfanta(pagination, 'twitter_bootstrap3') }}
-                </div>
             </div>
-            <hr>
-        </div><!--/center-->
-        <br/>
+        {% endfor %}
+        <div class="text-center">
 
-    </div><!--/container-fluid-->
+            {% if app.environment == 'dev' %}
+                dev
+            {% else %}
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- test chaussures -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:728px;height:90px"
+                     data-ad-client="ca-pub-8150493752884542"
+                     data-ad-slot="1024469312"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            {% endif %}
+        </div>
+    </div>
+    <div class="pagerfanta text-center"> {{  pagerfanta(pagination, 'twitter_bootstrap3') }}
+    </div>
+</div>
+<hr>
+</div><!--/center-->
+<br/>
+
+</div><!--/container-fluid-->
 
 {% endblock %}
 
