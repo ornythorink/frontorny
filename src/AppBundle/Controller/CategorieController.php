@@ -46,7 +46,7 @@ class CategorieController extends Controller
 //        echo '<pre>';
 //      var_dump($stopwords);exit;
 //        echo '</pre>';
-
+        $stoplist = [];
         foreach($stopwords as $key => $word){
             $stoplist[] = $word;
         }
