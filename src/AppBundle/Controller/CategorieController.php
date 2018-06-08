@@ -32,9 +32,36 @@ class CategorieController extends Controller
 
         $decoded = json_decode($json->getBody());
 
+        // @todo stocker l'ensemble des produits pour les filtrer
 //        echo '<pre>';
-//      var_dump($decoded);exit;
+//      var_dump($decoded->products);exit;
 //        echo '</pre>';
+
+        $stopwords_json = $client->request('GET',
+            Configuration::getApiUrl( $this->container->get('kernel')->getEnvironment() )
+            . $locale .'/stopwordsbyslug/'
+            . $slug );
+        $stopwords = json_decode($stopwords_json->getBody());
+
+//        echo '<pre>';
+//      var_dump($stopwords);exit;
+//        echo '</pre>';
+
+        foreach($stopwords as $key => $word){
+            $stoplist[] = $word;
+        }
+
+        foreach($decoded->products as $key => &$value){
+            foreach($stoplist as $stop){
+                if(isset($value))
+                {
+                    if(stripos($value->name, $stop->stopword) !== false){
+                        unset($decoded->products[$key]);
+                    }
+                }
+
+            }
+        }
 
         //try if null
         $adapter = new ArrayAdapter($decoded->products);
