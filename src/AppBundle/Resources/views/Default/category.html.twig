@@ -28,27 +28,27 @@
         <div class="col-sm-2">
             <br/>
             <div class="side panel panel-default">
-                <div class="panel-heading">
-                    Marques
-                </div>
-                <div class="panel-body" style="overflow:auto; height:200px"  >
-                    {% for   key in brandFilter %}
-                        <input type="checkbox" />&nbsp;<a class="marque" data-param="{{ key }}">{{ key }} </a><br/>
-                    {% endfor %}
-                </div>
+                {#<div class="panel-heading">#}
+                    {#Marques#}
+                {#</div>#}
+                {#<div class="panel-body" style="overflow:auto; height:200px"  >#}
+                    {#{% for   key in brandFilter %}#}
+                        {#<input type="checkbox" />&nbsp;<a class="marque" data-param="{{ key }}">{{ key }} </a><br/>#}
+                    {#{% endfor %}#}
+                {#</div>#}
             </div>
 
             <hr>
 
             <div class="side panel panel-default">
-                <div class="panel-heading">
-                    Prix
-                </div>
-                <div class="panel-body">
-                    {% for  key, price in priceFilter %}
-                        <a class="price" data-param="{{ key }}">{{ price }} </a><br/>
-                    {% endfor %}
-                </div>
+                {#<div class="panel-heading">#}
+                    {#Prix#}
+                {#</div>#}
+                {#<div class="panel-body">#}
+                    {#{% for  key, price in priceFilter %}#}
+                        {#<a class="price" data-param="{{ key }}">{{ price }} </a><br/>#}
+                    {#{% endfor %}#}
+                {#</div>#}
             </div>
 
             <hr>
